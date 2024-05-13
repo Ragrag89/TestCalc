@@ -20,20 +20,16 @@ public class Calculator {
         String[] operand = operator.split("[+\\-*/]");
         if (operand.length != 2) throw new Exception("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
         oper = detectOperator(operator);
-        //если оба числа римские
         if (Roman.isRoman(operand[0]) && Roman.isRoman(operand[1])) {
-            //конвертируем оба числа в арабские для вычесления действия
             num1 = Roman.convertArab(operand[0]);
             num2 = Roman.convertArab(operand[1]);
             isRoman = true;
         }
-        //если оба числа арабские
         else if (!Roman.isRoman(operand[0]) && !Roman.isRoman(operand[1])) {
             num1 = Integer.parseInt(operand[0]);
             num2 = Integer.parseInt(operand[1]);
             isRoman = false;
         }
-        //если одни число римское, а другое - арабское
         else {
             throw new Exception("Числа должны быть в одном формате");
         }
@@ -42,17 +38,13 @@ public class Calculator {
         }
         int arab = calc(num1, oper, num2);
         if (isRoman) {
-            //если римское число получилось меньше либо равно нулю, генерируем ошибку
             if (arab <= 0) {
                 throw new Exception("Римское число должно быть больше нуля");
             }
-            //конвертируем результат операции из арабского в римское
             result = Roman.convertRom(arab);
         } else {
-            //Конвертируем арабское число в тип String
             result = String.valueOf(arab);
         }
-        //возвращаем результат
         return result;
     }
 
@@ -107,6 +99,5 @@ class Roman {
     public static String convertRom(int arab) {
         return romanArray[arab];
     }
-
 }
 
