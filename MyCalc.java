@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class MyCalc {
     public static void main(String[] args) throws Exception {
+     doOperation();
+    }
+
+    private static void doOperation() throws Exception {
         System.out.println("Введите выражение и знак операции через пробел:");
         Scanner scan = new Scanner(System.in);
         String str = scan.nextLine();
@@ -24,7 +28,7 @@ public class MyCalc {
         }
 
         if (data[0].contains("\"")) {
-            if (data[0].length() > 10 || data[1].length() > 10) {
+            if (data[0].replace("\"", "").length() > 10 || data[1].replace("\"", "").length() > 10) {
                 throw new Exception("Строки не должны быть длиннее 10 символов");
             } else if (data[1].contains("\"")) {
                 for (int i = 0; i < data.length; i++) {
@@ -61,7 +65,7 @@ public class MyCalc {
                     }
                     if (result.length() > 40) {
                         String newResult = result.substring(0, 40);
-                        quotes(newResult+"...");
+                        quotes(newResult + "...");
                     } else {
                         quotes(result);
                     }
@@ -70,7 +74,7 @@ public class MyCalc {
                     if (n > 10) {
                         throw new Exception("Числа должны быть от 1 до 10");
                     }
-                    int newLength = data[0].length()/n;
+                    int newLength = data[0].length() / n;
                     String result = data[0].substring(0, newLength);
                     quotes(result);
                 }
